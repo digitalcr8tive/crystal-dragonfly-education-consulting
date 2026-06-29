@@ -132,9 +132,11 @@ cite { font-family: var(--display); }
 .page-hero-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--canvas) 0%, oklch(0.985 0.004 95 / 0.96) 44%, oklch(0.985 0.004 95 / 0.38) 70%, transparent 92%); }
 .page-hero-photo .page-hero-copy { min-height: 30rem; }
 .page-hero-photo .page-hero-copy h1 { font-size: clamp(2.35rem, 3.7vw, 3.55rem); }
+.page-hero-about .page-hero-photo-bg { background-image: url("assets/images/about-leadership-hero.webp"); background-position: 62% center; }
 .page-hero-service .page-hero-photo-bg { background-image: url("assets/images/services-planning-hero.webp"); background-position: 60% center; }
 .page-hero-contact .page-hero-photo-bg { background-image: url("assets/images/consultation-space.webp"); background-position: 55% center; }
 .page-hero-faq .page-hero-photo-bg { background-image: url("assets/images/faq-resource-hero.webp"); background-position: 62% center; }
+.page-hero-about::after,
 .page-hero-faq::after,
 .page-hero-contact::after { background: linear-gradient(90deg, var(--canvas) 0%, oklch(0.985 0.004 95 / 0.95) 42%, oklch(0.985 0.004 95 / 0.42) 68%, transparent 90%); }
 .page-hero-green { color: white; background: var(--forest); }
