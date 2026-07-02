@@ -92,13 +92,17 @@ function isValidEndpoint(value) {
 }
 
 if (contactForm) {
+  let formActionConfigured = false;
+
   if (isValidEndpoint(contactEndpoint)) {
     contactForm.action = contactEndpoint;
+    formActionConfigured = true;
   } else if (businessEmail && businessEmail.includes("@")) {
     contactForm.action = `https://formsubmit.co/${encodeURIComponent(businessEmail)}`;
+    formActionConfigured = true;
   }
 
-  if (contactForm.action) {
+  if (formActionConfigured) {
     const redirectUrl = `${window.location.origin}${window.location.pathname}?sent=true`;
     contactForm.insertAdjacentHTML("beforeend", `<input type="hidden" name="_next" value="${redirectUrl}">`);
     if (contactStatus) contactStatus.textContent = "Your message will be sent to the business owner for follow-up.";
