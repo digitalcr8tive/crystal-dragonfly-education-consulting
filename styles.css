@@ -466,7 +466,9 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
 }
 .hero-image {
   background-position: 65% center;
-  filter: saturate(0.72) contrast(0.98);
+  background-color: oklch(0.34 0.068 244 / 0.1);
+  background-blend-mode: soft-light;
+  filter: saturate(0.68) contrast(0.98) brightness(1.01);
 }
 .hero::after {
   background: linear-gradient(90deg, oklch(0.985 0.005 235) 0%, oklch(0.985 0.005 235 / 0.98) 38%, oklch(0.985 0.005 235 / 0.58) 61%, transparent 80%);
@@ -490,7 +492,11 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
 }
 
 .page-hero-photo { min-height: 31rem; background: var(--blue-soft); }
-.page-hero-photo-bg { filter: saturate(0.68) contrast(0.96); }
+.page-hero-photo-bg {
+  background-color: oklch(0.34 0.068 244 / 0.1);
+  background-blend-mode: soft-light;
+  filter: saturate(0.66) contrast(0.97) brightness(1.01);
+}
 .page-hero-photo::after,
 .page-hero-about::after,
 .page-hero-faq::after,
@@ -537,7 +543,7 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
 .expectations-inner h2 { color: white; }
 .expectations .check-list { color: oklch(0.93 0.012 235); }
 .expectations .check-list svg { color: var(--gold); fill: var(--gold); }
-.expectations > img { filter: saturate(0.72) contrast(0.95); }
+.expectations > img { filter: saturate(0.66) contrast(0.96) brightness(0.99); }
 
 .site-paths { background: var(--gold-soft); }
 .path-list > a { transition: padding 200ms var(--ease-out), background 200ms ease; }
@@ -635,9 +641,13 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
 
 @media (max-width: 50rem) {
   .hero { min-height: 42rem; align-items: start; }
-  .hero-image { height: 52%; filter: saturate(0.68); }
+  .hero-image { height: 52%; background-position: 62% center; }
   .hero::after { background: linear-gradient(180deg, var(--canvas) 0%, var(--canvas) 48%, oklch(0.985 0.005 235 / 0.72) 66%, transparent 88%); }
   .page-hero-photo-bg { height: 52%; }
+  .page-hero-about .page-hero-photo-bg { background-position: 60% center; }
+  .page-hero-service .page-hero-photo-bg { background-position: 57% center; }
+  .page-hero-faq .page-hero-photo-bg { background-position: 65% center; }
+  .page-hero-contact .page-hero-photo-bg { background-position: 57% center; }
   .page-hero-photo::after,
   .page-hero-about::after,
   .page-hero-faq::after,
@@ -646,6 +656,7 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
   .principles { border: 0; }
   .principles article { padding-block: 1rem; }
   .expectations { grid-template-columns: 1fr; }
+  .expectations > img { object-position: 52% center; }
   .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .service-card,
   .service-card:nth-child(4),
