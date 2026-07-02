@@ -2,15 +2,14 @@
 
 ## Theme
 
-The official Crystal Dragonfly identity translated into a clear education-services website. Deep navy provides authority, marine blue and teal carry the logo's sense of movement and growth, cool mist creates breathing room, and natural photography keeps the practice personal.
+The official Crystal Dragonfly identity translated into a clear education-services website. Deep navy provides authority, steel blue carries the logo's sense of movement, cool mist creates breathing room, and natural photography keeps the practice personal.
 
 ## Color
 
-- Navy: `oklch(0.27 0.055 244)`
-- Marine: `oklch(0.34 0.068 244)`
-- Teal: `oklch(0.36 0.065 181)`
-- Steel blue: `oklch(0.51 0.073 239)`
-- Cool mist: `oklch(0.96 0.014 235)`
+- Logo navy: `#123550`
+- Marine navy: `#234E6D`
+- Logo steel blue: `#3E6D8C`
+- Cool mist: `#EFF5F8`
 - Ink: `oklch(0.28 0.042 242)`
 - Muted ink: `oklch(0.47 0.035 240)`
 
