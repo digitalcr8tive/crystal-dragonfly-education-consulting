@@ -557,7 +557,12 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
 .path-list > a > svg { color: var(--blue); }
 
 .section-tint { background: var(--gold-soft); }
-.cta-band { position: relative; overflow: hidden; background: var(--navy); }
+.cta-band {
+  position: relative;
+  overflow: hidden;
+  background: var(--steel-dark);
+  border-bottom: 1px solid oklch(1 0 0 / 0.2);
+}
 .cta-band::after,
 .approach-section::after {
   content: "";
@@ -580,8 +585,8 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
 }
 .cta-band .button-light:hover {
   color: white;
-  background: var(--steel-dark);
-  border-color: var(--steel-dark);
+  background: var(--navy);
+  border-color: var(--navy);
 }
 
 .about-copy .lead,
