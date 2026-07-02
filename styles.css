@@ -117,7 +117,7 @@ cite { font-family: var(--display); }
 .text-link svg { width: 1rem; }
 
 .hero { position: relative; min-height: min(40rem, calc(100svh - 5rem)); overflow: hidden; isolation: isolate; display: grid; align-items: start; }
-.hero-image { position: absolute; inset: 0; z-index: -2; background: url("assets/images/education-consulting-hero.webp") 64% center / cover no-repeat; }
+.hero-image { position: absolute; inset: 0; z-index: -2; background: url("assets/images/education-consulting-hero-blue.jpg") 64% center / cover no-repeat; }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--canvas) 0%, oklch(0.985 0.004 235 / 0.97) 36%, oklch(0.985 0.004 235 / 0.45) 58%, transparent 76%); }
 .hero::before { content: ""; position: absolute; right: -5%; bottom: -2.5rem; left: -5%; height: 5rem; z-index: 1; background: var(--canvas); border-radius: 50% 50% 0 0 / 30% 30% 0 0; border-top: 1px solid oklch(0.72 0.08 239); }
 .hero-content { padding-block: clamp(3rem, 6vw, 5rem) clamp(5rem, 8vw, 7rem); }
@@ -141,14 +141,14 @@ cite { font-family: var(--display); }
 .page-hero-split .page-hero-copy { padding-block: 2.75rem; }
 .page-hero-split .page-hero-copy h1 { max-width: 16ch; font-size: clamp(2.3rem, 3.2vw, 3rem); }
 .page-hero-photo { min-height: 30rem; isolation: isolate; }
-.page-hero-photo-bg { position: absolute; inset: 0; z-index: -2; background: url("assets/images/education-consulting-hero.webp") 60% 58% / cover no-repeat; }
+.page-hero-photo-bg { position: absolute; inset: 0; z-index: -2; background: url("assets/images/education-consulting-hero-blue.jpg") 60% 58% / cover no-repeat; }
 .page-hero-photo::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, var(--canvas) 0%, oklch(0.985 0.004 235 / 0.96) 44%, oklch(0.985 0.004 235 / 0.38) 70%, transparent 92%); }
 .page-hero-photo .page-hero-copy { min-height: 30rem; }
 .page-hero-photo .page-hero-copy h1 { font-size: clamp(2.35rem, 3.7vw, 3.55rem); }
-.page-hero-about .page-hero-photo-bg { background-image: url("assets/images/about-leadership-hero.webp"); background-position: 62% center; }
-.page-hero-service .page-hero-photo-bg { background-image: url("assets/images/services-planning-hero.webp"); background-position: 60% center; }
-.page-hero-contact .page-hero-photo-bg { background-image: url("assets/images/consultation-space.webp"); background-position: 55% center; }
-.page-hero-faq .page-hero-photo-bg { background-image: url("assets/images/faq-resource-hero.webp"); background-position: 62% center; }
+.page-hero-about .page-hero-photo-bg { background-image: url("assets/images/about-leadership-hero-blue.jpg"); background-position: 62% center; }
+.page-hero-service .page-hero-photo-bg { background-image: url("assets/images/services-planning-hero-blue.jpg"); background-position: 60% center; }
+.page-hero-contact .page-hero-photo-bg { background-image: url("assets/images/consultation-space-blue.jpg"); background-position: 55% center; }
+.page-hero-faq .page-hero-photo-bg { background-image: url("assets/images/faq-resource-hero-blue.jpg"); background-position: 62% center; }
 .page-hero-about::after,
 .page-hero-faq::after,
 .page-hero-contact::after { background: linear-gradient(90deg, var(--canvas) 0%, oklch(0.985 0.004 95 / 0.95) 42%, oklch(0.985 0.004 95 / 0.42) 68%, transparent 90%); }
