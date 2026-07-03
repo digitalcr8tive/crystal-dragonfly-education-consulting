@@ -1,0 +1,8 @@
+{
+  "name": "crystal-dragonfly-education-consulting",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

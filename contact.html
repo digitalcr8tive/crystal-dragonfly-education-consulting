@@ -24,8 +24,6 @@
         <div class="contact-panel" aria-labelledby="contact-form-title">
           <div class="contact-panel-heading"><i data-lucide="send" aria-hidden="true"></i><div><h2 id="contact-form-title">Contact form</h2><p>Required fields are marked with an asterisk.</p></div></div>
           <form class="contact-form" method="post" data-contact-form>
-            <input type="hidden" name="_subject" value="New inquiry from The Crystal Dragonfly website" />
-            <input type="hidden" name="_template" value="table" />
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="form-honey" />
 
             <label>Full Name *<input type="text" name="name" autocomplete="name" required /></label>
@@ -51,7 +49,7 @@
             </label>
             <label class="form-wide">Your Message *<textarea name="message" rows="6" placeholder="Briefly share what kind of support you are looking for." required></textarea></label>
 
-            <div class="form-actions"><button class="button" type="submit">Send Message</button><p data-contact-status></p></div>
+            <div class="form-actions"><button class="button" type="submit">Send Message</button><p data-contact-status aria-live="polite"></p></div>
           </form>
         </div>
       </div></section>

@@ -18,33 +18,23 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 Then open `http://127.0.0.1:4173`.
 
-## Connect the contact form (Resend)
+## Activate Resend email delivery
 
-The contact form sends submissions through Resend's API directly. No backend or serverless platform required — works on any static host (GitHub Pages, Porkbun, etc.).
+GitHub Pages hosts the public website, but a server-side function is required to keep the Resend API key private. The secure function is included at `api/contact.js` and is ready to deploy through Vercel.
 
-### Quick setup for the business owner
+1. Import this GitHub repository into Vercel.
+2. Add these Production environment variables in Vercel:
+   - `RESEND_API_KEY`: API key from the Resend dashboard.
+   - `CONTACT_TO_EMAIL`: business owner's recipient email.
+   - `RESEND_FROM_EMAIL`: verified sender, such as `The Crystal Dragonfly <inquiries@updates.example.com>`.
+   - `ALLOWED_ORIGINS`: optional comma-separated additional origins. The public GitHub Pages origin is already allowed.
+   - The same names are listed in `.env.example` for reference. Never commit real values.
+3. Verify the sending domain in Resend by adding the SPF and DKIM records it provides.
+4. Deploy the Vercel project.
+5. Copy the deployed URL into `contactFormEndpoint` in `site-config.js`, ending in `/api/contact`.
+6. Submit a test message from `contact.html` and confirm it appears in the Resend logs and the recipient inbox.
 
-1. **Get a Resend API key** at https://resend.com/api-keys
-   - For security, restrict the key to the site's domain in the Resend dashboard
-2. **Verify your domain** in Resend (or use `onboarding@resend.dev` for testing)
-3. **Open `site-config.js`** and fill in:
-   - `resendApiKey` — your Resend API key
-   - `toEmail` — the email where inquiries should arrive
-   - (optional) `fromEmail` — a verified sending address for your domain
-4. **Test** — submit the contact form and confirm the email arrives
-
-### How it works
-
-```
-contact.html form submit
-  → JavaScript fetch() to https://api.resend.com/emails
-    → Resend delivers email to toEmail
-      → form shows "Thank you" and resets
-```
-
-### Security note
-
-The Resend API key is visible in the site's source code. Create a **domain-restricted key** in the Resend dashboard (Settings → API Keys → restrict to your domain) so the key can't be used from other sites.
+Do not place `RESEND_API_KEY` or `CONTACT_TO_EMAIL` in `site-config.js`; that file is public. Until the endpoint URL and environment variables are added, the form remains safely disabled instead of losing submissions.
 
 ## Add business details later
 
