@@ -1,8 +1,0 @@
-{
-  "name": "crystal-dragonfly-education-consulting",
-  "private": true,
-  "description": "Website for The Crystal Dragonfly Education Consulting",
-  "dependencies": {
-    "resend": "^4.0.0"
-  }
-}

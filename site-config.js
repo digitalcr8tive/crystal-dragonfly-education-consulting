@@ -1,13 +1,15 @@
 window.CRYSTAL_DRAGONFLY_CONFIG = {
-  // The Netlify serverless function that forwards form data via Resend.
-  // Set to a full https:// URL if using a different backend.
-  contactFormEndpoint: "/.netlify/functions/contact",
+  // Resend API key — create one at https://resend.com/api-keys
+  // For security, restrict the key to this domain in Resend dashboard.
+  resendApiKey: "",
 
-  // Optional: fallback email for FormSubmit if the Resend endpoint is unavailable.
-  // FormSubmit may require the owner to confirm the email address after the first test submission.
-  businessEmail: "",
+  // Email where contact form submissions are delivered
+  toEmail: "",
 
-  // This optional value can be added when the business details are ready.
+  // Optional: verified sending address (defaults to Resend's onboarding sender)
+  // fromEmail: "Crystal Dragonfly <hello@yourdomain.com>",
+
+  // Optional: business phone (appears in footer when set)
   businessPhone: "",
   serviceArea: "Arkansas and virtual consultations",
 };

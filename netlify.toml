@@ -1,8 +1,0 @@
-[build]
-  functions = "netlify/functions"
-
-[[redirects]]
-  from = "/contact.html?sent=true"
-  to = "/contact.html"
-  status = 200
-  force = false

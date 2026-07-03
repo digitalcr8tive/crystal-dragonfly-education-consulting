@@ -79,39 +79,72 @@ if (serviceArea && serviceAreaElement) serviceAreaElement.textContent = serviceA
 
 const contactForm = document.querySelector("[data-contact-form]");
 const contactStatus = document.querySelector("[data-contact-status]");
-const contactEndpoint = String(config.contactFormEndpoint || "").trim();
-
-function isValidEndpoint(value) {
-  if (!value) return false;
-  // Relative paths are valid for Netlify Functions, Vercel Functions, etc.
-  if (value.startsWith("/")) return true;
-  try {
-    const url = new URL(value);
-    return url.protocol === "https:";
-  } catch {
-    return false;
-  }
-}
+const resendApiKey = String(config.resendApiKey || "").trim();
+const toEmail = String(config.toEmail || "").trim();
+const fromEmail = String(config.fromEmail || "").trim() || "Crystal Dragonfly <onboarding@resend.dev>";
 
 if (contactForm) {
-  let formActionConfigured = false;
+  const resendReady = resendApiKey && toEmail && toEmail.includes("@");
 
-  if (isValidEndpoint(contactEndpoint)) {
-    contactForm.action = contactEndpoint;
-    formActionConfigured = true;
-  } else if (businessEmail && businessEmail.includes("@")) {
-    contactForm.action = `https://formsubmit.co/${encodeURIComponent(businessEmail)}`;
-    formActionConfigured = true;
-  }
-
-  if (formActionConfigured) {
-    const redirectUrl = `${window.location.origin}${window.location.pathname}?sent=true`;
-    contactForm.insertAdjacentHTML("beforeend", `<input type="hidden" name="_next" value="${redirectUrl}">`);
+  if (resendReady || (businessEmail && businessEmail.includes("@"))) {
     if (contactStatus) contactStatus.textContent = "Your message will be sent to the business owner for follow-up.";
+
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.target;
+      const data = new FormData(form);
+
+      if (resendReady) {
+        if (contactStatus) contactStatus.textContent = "Sending…";
+
+        try {
+          const response = await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${resendApiKey}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              from: fromEmail,
+              to: [toEmail],
+              subject: data.get("_subject") || "New inquiry from The Crystal Dragonfly website",
+              reply_to: data.get("email") || undefined,
+              html: [
+                "<h2>New Contact Form Inquiry</h2>",
+                "<table style='border-collapse:collapse;width:100%;max-width:600px'>",
+                `<tr><td style='padding:8px;border:1px solid #ddd;font-weight:bold'>Name</td><td style='padding:8px;border:1px solid #ddd'>${data.get("name") || "—"}</td></tr>`,
+                `<tr><td style='padding:8px;border:1px solid #ddd;font-weight:bold'>Email</td><td style='padding:8px;border:1px solid #ddd'>${data.get("email") || "—"}</td></tr>`,
+                `<tr><td style='padding:8px;border:1px solid #ddd;font-weight:bold'>Phone</td><td style='padding:8px;border:1px solid #ddd'>${data.get("phone") || "—"}</td></tr>`,
+                `<tr><td style='padding:8px;border:1px solid #ddd;font-weight:bold'>Service Interest</td><td style='padding:8px;border:1px solid #ddd'>${data.get("service_interest") || "—"}</td></tr>`,
+                `<tr><td style='padding:8px;border:1px solid #ddd;font-weight:bold'>Preferred Contact</td><td style='padding:8px;border:1px solid #ddd'>${data.get("preferred_contact_method") || "—"}</td></tr>`,
+                `<tr><td style='padding:8px;border:1px solid #ddd;font-weight:bold'>Message</td><td style='padding:8px;border:1px solid #ddd'>${data.get("message") || ""}</td></tr>`,
+                "</table>",
+              ].join(""),
+            }),
+          });
+
+          if (response.ok) {
+            if (contactStatus) contactStatus.textContent = "Thank you. Your message has been sent.";
+            form.reset();
+          } else {
+            const err = await response.json().catch(() => ({}));
+            console.error("Resend error:", err);
+            if (contactStatus) contactStatus.textContent = "Failed to send. Please try again or email directly.";
+          }
+        } catch (error) {
+          console.error("Resend error:", error);
+          if (contactStatus) contactStatus.textContent = "Failed to send. Please try again or email directly.";
+        }
+      } else {
+        // Fallback: FormSubmit via businessEmail
+        form.action = `https://formsubmit.co/${encodeURIComponent(businessEmail)}`;
+        form.submit();
+      }
+    });
   } else {
     contactForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      if (contactStatus) contactStatus.textContent = "Add the owner email or form endpoint in site-config.js before this form can send messages.";
+      if (contactStatus) contactStatus.textContent = "Add the owner email or Resend API key in site-config.js before this form can send messages.";
     });
   }
 

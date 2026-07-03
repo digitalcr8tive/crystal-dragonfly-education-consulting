@@ -20,31 +20,31 @@ Then open `http://127.0.0.1:4173`.
 
 ## Connect the contact form (Resend)
 
-The contact form sends submissions through Resend using a Netlify serverless function. The API key stays server-side — never exposed to the browser.
+The contact form sends submissions through Resend's API directly. No backend or serverless platform required — works on any static host (GitHub Pages, Porkbun, etc.).
 
 ### Quick setup for the business owner
 
 1. **Get a Resend API key** at https://resend.com/api-keys
-2. **Deploy to Netlify** (one-click import from this repo)
-3. **Add environment variables** in Netlify → Site settings → Environment variables:
-   - `RESEND_API_KEY` — your Resend API key
-   - `CONTACT_FORM_TO_EMAIL` — the email where inquiries should arrive
-   - (optional) `CONTACT_FORM_FROM_EMAIL` — verified sending address for your domain
-4. **Triggers a deploy** so Netlify picks up the new variables
-5. **Submit a test message** from `contact.html` to confirm delivery
+   - For security, restrict the key to the site's domain in the Resend dashboard
+2. **Verify your domain** in Resend (or use `onboarding@resend.dev` for testing)
+3. **Open `site-config.js`** and fill in:
+   - `resendApiKey` — your Resend API key
+   - `toEmail` — the email where inquiries should arrive
+   - (optional) `fromEmail` — a verified sending address for your domain
+4. **Test** — submit the contact form and confirm the email arrives
 
 ### How it works
 
 ```
-contact.html form
-  → POST to /.netlify/functions/contact
-    → Resend API sends email to CONTACT_FORM_TO_EMAIL
-      → redirects back to /contact.html?sent=true
+contact.html form submit
+  → JavaScript fetch() to https://api.resend.com/emails
+    → Resend delivers email to toEmail
+      → form shows "Thank you" and resets
 ```
 
-### Fallback (no Netlify)
+### Security note
 
-Edit `site-config.js` and set `businessEmail` to the owner's address. The form will route through FormSubmit instead. FormSubmit may require email confirmation after the first test submission.
+The Resend API key is visible in the site's source code. Create a **domain-restricted key** in the Resend dashboard (Settings → API Keys → restrict to your domain) so the key can't be used from other sites.
 
 ## Add business details later
 
