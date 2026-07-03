@@ -18,14 +18,33 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 Then open `http://127.0.0.1:4173`.
 
-## Connect the contact form
+## Connect the contact form (Resend)
 
-1. Open `site-config.js`.
-2. Add the business owner email to `businessEmail`, or add a dedicated form service URL to `contactFormEndpoint`.
-3. Submit a test message from `contact.html`.
-4. If using FormSubmit through `businessEmail`, confirm the owner email address after the first test submission.
+The contact form sends submissions through Resend using a Netlify serverless function. The API key stays server-side — never exposed to the browser.
 
-The form is ready for GitHub Pages, but it needs a real recipient email or form endpoint before messages can reach the owner.
+### Quick setup for the business owner
+
+1. **Get a Resend API key** at https://resend.com/api-keys
+2. **Deploy to Netlify** (one-click import from this repo)
+3. **Add environment variables** in Netlify → Site settings → Environment variables:
+   - `RESEND_API_KEY` — your Resend API key
+   - `CONTACT_FORM_TO_EMAIL` — the email where inquiries should arrive
+   - (optional) `CONTACT_FORM_FROM_EMAIL` — verified sending address for your domain
+4. **Triggers a deploy** so Netlify picks up the new variables
+5. **Submit a test message** from `contact.html` to confirm delivery
+
+### How it works
+
+```
+contact.html form
+  → POST to /.netlify/functions/contact
+    → Resend API sends email to CONTACT_FORM_TO_EMAIL
+      → redirects back to /contact.html?sent=true
+```
+
+### Fallback (no Netlify)
+
+Edit `site-config.js` and set `businessEmail` to the owner's address. The form will route through FormSubmit instead. FormSubmit may require email confirmation after the first test submission.
 
 ## Add business details later
 

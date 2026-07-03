@@ -83,6 +83,8 @@ const contactEndpoint = String(config.contactFormEndpoint || "").trim();
 
 function isValidEndpoint(value) {
   if (!value) return false;
+  // Relative paths are valid for Netlify Functions, Vercel Functions, etc.
+  if (value.startsWith("/")) return true;
   try {
     const url = new URL(value);
     return url.protocol === "https:";
