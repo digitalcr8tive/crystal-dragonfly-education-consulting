@@ -711,7 +711,7 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
 
 .page-hero-testimonials .page-hero-photo-bg {
   background-image: url("assets/images/crystal-keynote.png");
-  background-position: 72% 24%;
+  background-position: 72% top;
   filter: saturate(0.78) contrast(0.98) brightness(0.96);
 }
 
@@ -862,7 +862,7 @@ h2 { font-size: clamp(2rem, 3.7vw, 3.45rem); }
 
 @media (max-width: 50rem) {
   .page-hero-service .page-hero-photo-bg { background-position: 57% 38%; }
-  .page-hero-testimonials .page-hero-photo-bg { background-position: 66% 24%; }
+  .page-hero-testimonials .page-hero-photo-bg { background-position: 66% top; }
   .page-hero-testimonials::after { background: linear-gradient(180deg, var(--canvas) 0%, var(--canvas) 49%, oklch(0.985 0.005 235 / 0.72) 70%, transparent 95%); }
   .portrait-bio,
   .service-pillars,
